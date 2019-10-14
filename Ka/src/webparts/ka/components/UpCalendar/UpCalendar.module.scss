@@ -1,0 +1,68 @@
+@import "~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss";
+$theme-neutral-primary: "[theme:neutralPrimary, default:#333333]";
+$theme-primary: "[theme:themePrimary, default:#0078d4]";
+
+.webPartBorder{
+  border: 1px solid rgb(234, 234, 234);
+
+}
+.upCalendar {
+  color: $theme-neutral-primary;
+  // background-color: rgba(244, 188, 66, 0.1);
+
+  .webPartTitle {    
+    padding: 2px 0px 2px 8px;
+  }
+
+  .webPartTitleFilledColor{
+    background-color: $theme-primary;
+    color: white;
+  }
+
+  .upEventsWrapper {
+    padding: 0px 8px 8px 8px;
+    .upEventItem {
+      padding-bottom: 4px;
+      padding-top: 4px;
+
+      .dateRow {
+        font-size: 12px;
+        color: #858585;
+        margin-bottom: 4px;
+      }
+
+      .saveToOutlook {
+        a {
+          font-size: 12px;
+          font-weight: 500;
+          float: right;
+        }
+      }
+
+      border-bottom: 1px solid rgb(234, 234, 234);
+    }
+  }
+
+  a {
+    &:hover {
+      color: #858585;
+      cursor: pointer;
+    }
+    i {
+      color: $ms-color-themePrimary;
+      margin-right: 2px;
+    }
+    color: $theme-neutral-primary;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 400;
+  }
+
+  .showAllEvents {
+    margin-top: 10px;
+    font-size: 14px;
+    a {
+      font-size: 14px;
+    }
+  }
+}

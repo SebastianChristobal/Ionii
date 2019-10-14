@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "kalender-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/kalender/KalenderWebPart.js",
+          "manifest": "./src/webparts/kalender/KalenderWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "KalenderWebPartStrings": "lib/webparts/kalender/loc/{locale}.js"
+  }
+}
