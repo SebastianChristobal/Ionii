@@ -24,7 +24,7 @@ export default class MyApp extends React.Component<IMyAppProps, MyAppState> {
   }
   componentDidMount() {
     this._getUserProfile();
-
+    console.log("hej")
   }
 
   public _renderUser(): JSX.Element {
