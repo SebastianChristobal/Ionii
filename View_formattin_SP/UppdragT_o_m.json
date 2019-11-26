@@ -1,0 +1,32 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/sp/column-formatting.schema.json",
+  "elmType": "div",
+  "style": {
+    "position": "relative"
+  },
+  "children": [
+    {
+      "elmType": "div",
+      "attributes": {
+        "class": "=if([$Uppdrag_x0020_t_x002e_o_x002e_m] <= @now, 'sp-field-severity--severeWarning', if(1 - Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now) / Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - [$Uppdrag_startid]) >= 0.7, 'sp-field-severity--warning', 'sp-field-severity--good'))"
+      },
+      "style": {
+        "min-height": "inherit",
+        "width": "=if([$Uppdrag_x0020_t_x002e_o_x002e_m] <= @now, '100%', (1 - Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now) / Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - [$Uppdrag_startid])) * 100 + '%')",
+        "background-color": "=if([$Uppdrag_x0020_t_x002e_o_x002e_m] <= @now, '#EB6761', if(1 - Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now) / Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - [$Uppdrag_startid]) >= 0.7, '#EBDE61', '#10994C'))"
+      }
+    },
+    {
+      "elmType": "span",
+      "txtContent": "@currentField",
+      "style": {
+        "position": "absolute",
+        "left": "8px",
+        "color": "#000000"
+      },
+      "attributes": {
+        "class": "ms-fontColor-neutralSecondary"
+      }
+    }
+  ]
+}

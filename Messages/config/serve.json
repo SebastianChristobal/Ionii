@@ -1,0 +1,29 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/core-build/serve.schema.json",
+  "port": 4321,
+  "https": true,
+  "serveConfigurations": {
+    "default": {
+      "pageUrl": "https://ionii.sharepoint.com/SitePages/Home.aspx",
+      "customActions": {
+        "f7f69355-f538-4e9c-87ec-9508ca3ba266": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "Top": "Test message"
+          }
+        }
+      }
+    },
+    "messages": {
+      "pageUrl": "https://ionii.sharepoint.com/SitePages/Home.aspx",
+      "customActions": {
+        "f7f69355-f538-4e9c-87ec-9508ca3ba266": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "testMessage": "Test message"
+          }
+        }
+      }
+    }
+  }
+}

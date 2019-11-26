@@ -1,0 +1,37 @@
+@import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
+
+.app {
+  .top {
+      width: 100%;
+      color:black;
+      height: 35px;
+    }
+  .container{
+    min-width: 1030px;
+    height: 35px;
+    text-align:center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .Title{
+    float: left;
+    margin-left: 5px;
+    font-weight: normal; 
+    font-weight:bold;
+  }
+  .Description{
+    float: left;
+    margin-left: 5px;
+    font-weight: normal; 
+  }
+  .itemCategoryDiv{
+    float: left;
+    background-color:rgb(129, 160, 179);
+    width: 112px;
+    margin-left: 5px;
+    font-weight:bold;
+  }
+    
+}

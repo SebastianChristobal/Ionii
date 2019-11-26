@@ -1,0 +1,408 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/sp/view-formatting.schema.json",
+    "hideSelection": true,
+    "hideListHeader": true,
+    "rowFormatter": {
+      "elmType": "div",
+      "style": {
+        "display": "flex",
+        "flex-wrap": "wrap",
+        "align-items": "stretch",
+        "padding": "8px",
+        "margin-bottom": "16px",
+        "max-width": "930px",
+        "border-radius": "8px",
+        "box-shadow": "4px 4px 8px darkgrey",
+        "margin-left": "auto",
+        "margin-right": "auto",
+        "background-color": "#E2E6EB"
+      },
+
+      "children": [
+        {
+          "elmType": "div",
+          "style": {
+            "flex-grow": "1",
+            "display": "flex",
+            "flex-wrap": "wrap",
+            "align-items": "stretch",
+            "max-width": "310px"
+          },
+          "children": [
+            {
+              "elmType": "div",
+              "style": {
+                "flex": "none"
+              },
+              "children": [
+                {
+                  "elmType": "div",
+                  "style": {
+                    "width": "100px",
+                    "height": "100px",
+                    "overflow": "hidden",
+                    "border-radius": "50%",
+                    "margin-right": "8px"
+                  },
+                  "children": [
+                    {
+                      "elmType": "img",
+                      "attributes": {
+                        "src": "=if([$Picture] == '', @currentWeb + '/_layouts/15/userphoto.aspx?size=M', [$Picture])",
+                        "title": "=if([$Picture] == '', 'No picture available', [$Picture.desc])"
+                      },
+                      "style": {
+                        "position": "relative",
+                        "top": "50%",
+                        "left": "50%",
+                        "width": "100%",
+                        "height": "auto",
+                        "margin-left": "-50%",
+                        "margin-top": "-50%"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "elmType": "div",
+              "style": {
+                "flex-grow": "1",
+                "display": "flex",
+                "flex-direction": "column",
+                "flex-wrap": "nowrap",
+                "align-items": "stretch",
+                "max-width": "200px"
+              },
+              "children": [
+                {
+                  "elmType": "div",
+                  "style": {
+                    "flex-grow": "1"
+                  },
+                  "children": [
+                    {
+                      "elmType": "span",
+                      "txtContent": "[$Title]",
+                      "style": {
+                        "display": "block",
+                        "color": "black"
+                      },
+                      "attributes": {
+                        "class": "ms-fontSize-l ms-fontWeight-semibold ms-fontColor-neutralPrimary"
+                      }
+                    },
+                    {
+                      "elmType": "span",
+                      "txtContent": "[$JobTitle]",
+                      "style": {
+                        "display": "=if([$JobTitle] == '', 'none', 'block')",
+                        "color": "black"
+                      },
+                      "attributes": {
+                        "class": "ms-fontSize-m ms-fontWeight-regular ms-fontColor-neutralSecondary"
+                      }
+                    },
+                    {
+                      "elmType": "span",
+                      "txtContent": "[$Bolag]",
+                      "style": {
+                        "display": "=if([$Bolag] == '', 'none', 'block')",
+                        "color": "black"
+                      },
+                      "attributes": {
+                        "class": "ms-fontSize-m ms-fontWeight-regular ms-fontColor-neutralSecondary"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elmType": "div",
+                  "style": {
+                    "flex-grow": "1",
+                    "display": "flex",
+                    "flex-direction": "row",
+                    "flex-wrap": "wrap",
+                    "align-items": "flex-end"
+                  },
+                  "children": [
+                    {
+                      "elmType": "a",
+                      "style": {
+                        "display": "=if([$Mailadress] == '', 'none', 'block')",
+                        "width": "100%",
+                        "color": "black"
+                      },
+                      "attributes": {
+                        "class": "ms-fontSize-xs ms-fontWeight-regular ms-fontColor-neutralPrimary ms-fontColor-themePrimary--hover",
+                        "href": "='mailto:' + [$Mailadress] + '?body=Dear ' + [$Title] + ',\r\n'"
+                      },
+                      "children": [
+                        {
+                          "elmType": "span",
+                          "attributes": {
+                            "iconName": "Mail",
+                            "class": "ms-fontColor-themePrimary"
+                          },
+                          "style": {
+                            "padding-right": "6px",
+                            "color": "black"
+                          }
+                        },
+                        {
+                          "elmType": "span",
+                          "txtContent": "[$Mailadress]"
+                        }
+                      ]
+                    },
+                    {
+                      "elmType": "span",
+                      "style": {
+                        "display": "=if([$Mobiltelefon] == '', 'none', 'block')",
+                        "width": "100%",
+                        "color": "black"
+                      },
+                      "attributes": {
+                        "class": "ms-fontSize-xs ms-fontWeight-regular ms-fontColor-neutralPrimary"
+                      },
+                      "children": [
+                        {
+                          "elmType": "span",
+                          "attributes": {
+                            "iconName": "Mobiltelefon",
+                            "class": "ms-fontColor-themePrimary"
+                          },
+                          "style": {
+                            "padding-right": "6px",
+                            "color": "black"
+                          }
+                        },
+                        {
+                          "elmType": "span",
+                          "txtContent": "[$Mobiltelefon]"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "elmType": "div",
+          "style": {
+            "flex-grow": "1",
+            "display": "flex",
+            "flex-direction": "column",
+            "max-width": "310px",
+            "min-width": "155px",
+            "color": "black"
+          },
+          "children": [
+            {
+              "elmType": "div",
+              "style": {
+                "flex-grow": "1"
+              },
+              "children": [
+                {
+                  "elmType": "span",
+                  "style": {
+                    "display": "block"
+                  },
+                  "attributes": {
+                    "class": "ms-fontWeight-semibold ms-fontSize-m"
+                  },
+                  "txtContent": "Noteringar:"
+                },
+                {
+                  "elmType": "span",
+                  "style": {
+                    "display": "=if([$Noteringar] == '', 'none', 'block')",
+            
+                    "color": "black"
+                  },
+                  "txtContent": "[$Noteringar]",
+                  "attributes": {
+                    "class": "ms-fontSize-s ms-fontWeight-regular ms-fontColor-neutralSecondary"
+                  }
+                },
+                {
+                  "elmType": "span",
+                  "style": {
+                    "display": "=if([$Noteringar] == '', 'block', 'none')",
+                    "padding-left": "8px",
+                    "color": "black"
+                  },
+                  "txtContent": "Inga noteringar",
+                  "attributes": {
+                    "class": "ms-fontSize-s ms-fontWeight-semilight ms-fontColor-neutralTertiary"
+                  }
+                }
+              ]
+            },
+            {
+              "elmType": "div",
+              "style": {
+                "flex": "none",
+                "display": "flex",
+                "flex-direction": "row-reverse",
+                "flex-wrap": "nowrap",
+                "padding-right": "25px"
+              },
+              "children": [
+                {
+                  "elmType": "button",
+                  "customRowAction": {
+                    "action": "share"
+                  },
+                  "attributes": {
+                    "title": "Share",
+                    "class": "ms-fontColor-neutralPrimary ms-fontColor-themePrimary--hover"
+                  },
+                  "style": {
+                    "border": "none",
+                    "background-color": "transparent",
+                    "cursor": "pointer",
+                    "color": "black"
+                  },
+                  "children": [
+                    {
+                      "elmType": "span",
+                      "attributes": {
+                        "iconName": "Share"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elmType": "button",
+                  "customRowAction": {
+                    "action": "delete"
+                  },
+                  "attributes": {
+                    "title": "Delete",
+                    "class": "ms-fontColor-neutralPrimary ms-fontColor-red--hover"
+                  },
+                  "style": {
+                    "border": "none",
+                    "background-color": "transparent",
+                    "cursor": "pointer",
+                    "color": "black"
+                  },
+                  "children": [
+                    {
+                      "elmType": "span",
+                      "attributes": {
+                        "iconName": "Delete"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elmType": "button",
+                  "customRowAction": {
+                    "action": "editProps"
+                  },
+                  "attributes": {
+                    "title": "Edit",
+                    "class": "ms-fontColor-neutralPrimary ms-fontColor-themePrimary--hover"
+                  },
+                  "style": {
+                    "border": "none",
+                    "background-color": "transparent",
+                    "cursor": "pointer",
+                    "color": "black"
+                  },
+                  "children": [
+                    {
+                      "elmType": "span",
+                      "attributes": {
+                        "iconName": "Edit"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elmType": "button",
+                  "customRowAction": {
+                    "action": "defaultClick"
+                  },
+                  "attributes": {
+                    "title": "See more details",
+                    "class": "ms-fontColor-neutralPrimary ms-fontColor-themePrimary--hover"
+                  },
+                  "style": {
+                    "border": "none",
+                    "background-color": "transparent",
+                    "cursor": "pointer",
+                    "color": "black"
+                  },
+                  "children": [
+                    {
+                      "elmType": "span",
+                      "attributes": {
+                        "iconName": "ContactInfo"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+,
+        {
+          "elmType": "div",
+          "style": {
+            "flex-grow": "1",
+            "display": "flex",
+            "flex-direction": "column",
+            "max-width": "310px",
+            "min-width": "155px",
+            "color": "black"
+          },
+          
+          "children": [
+            {
+              "elmType": "span",
+              "attributes": {
+                "class": "=if([$Uppdrag_x0020_t_x002e_o_x002e_m] <= @now, 'sp-field-severity--severeWarning', if(1 - Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now) / Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - [$Uppdrag_fr_x002e_o_x002e_m]) >= 0.7, 'sp-field-severity--warning', 'sp-field-severity--good'))"
+              },
+              "style": {
+                "display": "block",
+                  "color": "white",
+                "max-height": "5px",
+                "border-radius": "5px",
+                "flex-grow": "1",
+                "width": "=if([$Uppdrag_x0020_t_x002e_o_x002e_m] <= @now, '100%', (1 - Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now) / Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - [$Uppdrag_fr_x002e_o_x002e_m])) * 100 + '%')",
+                "background-color": "=if([$Uppdrag_x0020_t_x002e_o_x002e_m] <= @now, '#EB6761', if(1 - Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now) / Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - [$Uppdrag_fr_x002e_o_x002e_m]) >= 0.7, '#EBDE61', 'rgba(39, 136, 84, 0.9)'))"
+              }
+            }, 
+            {
+              "elmType": "div",
+              "txtContent": "=if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<1 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=0,'Sista dagen',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<2 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=1,'2 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<3 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=2,'3 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<4 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=3,'4 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<5 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=4,'5 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<6 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=5,'6 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<7 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=6,'7 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<8 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=7,'8 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<9 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=8,'9 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<10 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=9,'10 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<11 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=10,'11 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<12 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=11,'12 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<13 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=12,'13 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<14 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=13,'14 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<15 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=14,'15 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<16 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=15,'16 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<17 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=16,'17 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<18 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=17,'18 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<19 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=18,'19 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<20 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=19,'20 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<21 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=20,'21 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<22 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=21,'22 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<23 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=22,'23 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<24 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=23,'24 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<25 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=24,'25 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<26 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=25,'26 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<27 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=26,'27 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<28 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=27,'28 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<29 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=28,'29 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<30 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=29,'30 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<31 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=30,'31 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<32 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=31,'32 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<33 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=32,'33 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<34 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=33,'34 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<35 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=34,'35 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<36 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=35,'36 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<37 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=36,'37 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<38 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=37,'38 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<39 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=38,'39 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<40 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=39,'40 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<41 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=40,'41 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<42 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=41,'42 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<43 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=42,'43 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<44 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=43,'44 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<45 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=44,'45 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<46 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=45,'46 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<47 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=46,'47 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<48 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=47,'48 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<49 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=48,'49 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<50 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=49,'50 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<51 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=50,'51 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<52 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=51,'52 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<53 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=52,'53 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<54 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=53,'54 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<55 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=54,'55 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<56 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=55,'56 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<57 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=56,'57 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<58 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=57,'58 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<59 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=58,'59 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<60 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=59,'60 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<61 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=60,'61 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<62 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=61,'62 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<63 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=62,'63 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<64 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=63,'64 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<65 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=64,'65 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<66 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=65,'66 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<67 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=66,'67 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<68 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=67,'68 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<69 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=68,'69 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<70 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=69,'70 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<71 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=70,'71 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<72 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=71,'72 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<73 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=72,'73 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<74 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=73,'74 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<75 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=74,'75 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<76 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=75,'76 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<77 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=76,'77 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<78 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=77,'78 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<79 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=78,'79 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<80 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=79,'80 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<81 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=80,'81 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<82 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=81,'82 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<83 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=82,'83 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<84 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=83,'84 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<85 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=84,'85 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<86 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=85,'86 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<87 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=86,'87 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<88 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=87,'88 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<89 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=88,'89 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<90 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=89,'90 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<91 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=90,'91 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<92 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=91,'92 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<93 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=92,'93 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<94 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=93,'94 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<95 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=94,'95 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<96 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=95,'96 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<97 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=96,'97 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<98 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=97,'98 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<99 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=98,'99 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<100 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=99,'100 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<101 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=100,'101 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<101 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=100,'101 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<102 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=101,'102 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<103 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=102,'103 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<104 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=103,'104 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<105 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=104,'105 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<106 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=105,'106 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<107 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=106,'107 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<108 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=107,'108 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<109 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=108,'109 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<110 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=109,'110 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<111 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=110,'111 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<112 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=111,'112 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<112 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=112,'113 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<114 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=113,'114 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<115 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=114,'115 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<116 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=115,'116 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<117 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=116,'117 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<118 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=117,'118 dagar kvar',if(((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)<119 && ((Number([$Uppdrag_x0020_t_x002e_o_x002e_m] - @now))/86400000)>=118,'119 dagar kvar',if([$Uppdrag_x0020_t_x002e_o_x002e_m] <= @now,'Ej i uppdrag','120 + dagar kvar'))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))",
+              "style":{
+                "text-align":"center",
+                "max-height": "inherit",
+                "overflow": "auto",
+                "flex-grow": "1",
+                "padding-top": "30px",
+                "display": "flex",
+                "align-items": "stretch",
+               "flex-direction": "column",
+                "color": "black",
+                "font-size": "20px",
+                "font-weight": "bold"
+               
+            }
+          } 
+            
+          ]
+       
+        } 
+      ]
+    }
+  }

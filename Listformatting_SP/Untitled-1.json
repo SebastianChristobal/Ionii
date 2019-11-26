@@ -1,0 +1,37 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json",
+    "elmType": "div",
+    "attributes": {
+        "class": "=if(@currentField == true,'yes', '')"
+      },
+    "txtContent": "@currentField",
+    "style": {
+      "background-color": "=if([$Uppdrag_x0020_t_x002e_o_x002e_m] <= @now + 86400000, '#ff0000',if([$Uppdrag_x0020_t_x002e_o_x002e_m] >= @now + 86400000, '#2EC41F', ''))",
+      "color": "#FFFFFF"
+    }
+  }
+
+
+  {
+    "$schema": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json",
+    "elmType": "div",
+    "attributes": {
+      "class": "=if(@currentField <= 70,'sp-field-severity--warning', '')"
+    },
+    "children": [
+      {
+        "elmType": "span",
+        "style": {
+          "display": "inline-block",
+          "padding": "0 4px"
+        },
+        "attributes": {
+          "iconName": "=if(@currentField <= 70,'Error', '')"
+        }
+      },
+      {
+        "elmType": "span",
+        "txtContent": "@currentField"
+      }
+    ]
+  }

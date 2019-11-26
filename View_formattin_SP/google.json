@@ -1,0 +1,85 @@
+        {
+          "elmType": "div",
+          "style": {
+            "flex-grow": "1",
+            "display": "flex",
+            "flex-direction": "column",
+            "flex-wrap": "nowrap",
+            "align-items": "stretch",
+            "max-width": "310px",
+            "min-width": "205px",
+            "margin-top": "8px"
+          },
+          "children": [
+            {
+              "elmType": "div",
+              "style": {
+                "flex-grow": "1",
+                "text-align": "center"
+              },
+              "children": [
+                {
+                  "elmType": "a",
+                  "attributes": {
+                    "href": "='https://www.google.com/maps/place/' + if([$StreetAddress] == '', '', [$StreetAddress] + ',') + if([$City] == '', '', [$City] + ',') + if([$State] == '', '', [$State]) + if([$ZipCode] == '', '', ' ' + [$ZipCode]) + '/'",
+                    "target": "_blank"
+                  },
+                  "style": {
+                    "height": "100%",
+                    "color": "black"
+                  },
+                  "children": [
+                    {
+                      "elmType": "img",
+                      "attributes": {
+                        "src": "='https://maps.googleapis.com/maps/api/staticmap?center=' + if([$StreetAddress] == '', '', [$StreetAddress] + ',') + if([$City] == '', '', [$City] + ',') + if([$State] == '', '', [$State]) + if([$ZipCode] == '', '', ' ' + [$ZipCode]) + '&size=200x60&key=AIzaSyDKNauYNcs4ZOq7sQMWYDyz1x82l00ek34'"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "elmType": "div",
+              "style": {
+                "flex-grow": "1",
+                "text-align": "center"
+              },
+              "children": [
+                {
+                  "elmType": "span",
+                  "txtContent": "[$StreetAddress]",
+                  "style": {
+                    "display": "=if([$StreetAddress] == '', 'none', 'block')",
+                    "color": "black"
+                  },
+                  "attributes": {
+                    "class": "ms-fontSize-sPlus ms-fontWeight-regular ms-fontColor-neutralSecondary"
+                  }
+                },
+                {
+                  "elmType": "span",
+                  "txtContent": "=if([$City] == '', '', [$City] + ', ') + if([$State] == '', '', [$State] + ' ') + if([$ZipCode] == '', '', [$ZipCode])",
+                  "style": {
+                    "display": "=if([$City] == '' && [$State] == '' && [$ZipCode] == '', 'none', 'block')",
+                    "color": "black"
+                  },
+                  "attributes": {
+                    "class": "ms-fontSize-sPlus ms-fontWeight-regular ms-fontColor-neutralSecondary"
+                  }
+                },
+                {
+                  "elmType": "span",
+                  "txtContent": "No address provided",
+                  "style": {
+                    "display": "=if([$City] == '' && [$State] == '' && [$ZipCode] == '', 'block', 'none')",
+                    "color": "black"
+                  },
+                  "attributes": {
+                    "class": "ms-fontSize-s ms-fontWeight-semilight ms-fontColor-neutralTertiary"
+                  }
+                }
+              ]
+            }
+          ]
+        }
