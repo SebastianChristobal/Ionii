@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "planner-task-extension-command-set": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/plannerTaskExtension/PlannerTaskExtensionCommandSet.js",
+          "manifest": "./src/extensions/plannerTaskExtension/PlannerTaskExtensionCommandSet.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "PlannerTaskExtensionCommandSetStrings": "lib/extensions/plannerTaskExtension/loc/{locale}.js"
+  }
+}
