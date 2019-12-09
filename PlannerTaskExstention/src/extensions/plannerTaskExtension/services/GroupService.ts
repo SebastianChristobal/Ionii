@@ -51,6 +51,23 @@ export class GroupServiceManager {
       }
     });
   }
+  public getPlansForGroup(groups: IGroup): Promise<MicrosoftGraph.Planner[]>  {
+    return new Promise<MicrosoftGraph.Planner[]>((resolve, reject) => {
+      try {
+        this.context.msGraphClientFactory
+        .getClient()
+        .then((client: MSGraphClient) => {
+          client.api(`/groups/${groups.id}/planner/plans`)
+          .get((error: any, groups: IGroupCollection, rawResponse: any) => {
+            console.log(groups.value);
+            resolve(groups.value);
+          });
+        });
+      } catch(error) {
+        console.error(error);
+      }
+    });
+  }
 
   public getGroupLinks(groups: IGroup): Promise<any> {
     return new Promise<any>((resolve, reject) => {
@@ -92,7 +109,6 @@ export class GroupServiceManager {
 
 }
 
-const GroupService = new GroupServiceManager();
-export default GroupService;
+
 
 

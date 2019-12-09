@@ -7,11 +7,13 @@ import { Stack } from 'office-ui-fabric-react/lib/Stack';
 import {IFormDialogState} from './IFormDialogState';
 import {IGroupFormDialogProps} from './IGroupFormDialogProps';
 import {GroupServiceManager} from '../../components/services/';
+import { IGroup } from '../models';
+import { ThemeSettingName } from '@uifabric/styling';
 
 
 export class FormDialogContent extends React.Component<IGroupFormDialogProps, IFormDialogState>   {
 
-  private _groupServiceManager = new GroupServiceManager;
+  private _groupServiceManager = new GroupServiceManager(this.props.graphClientFactory);
 
   constructor(props: IGroupFormDialogProps) {
     super(props);
@@ -30,7 +32,8 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
   }
 
    public componentDidMount(){
-    this._getPlannerTasks();
+    this._getGroups();
+    //this._getPlansForGroup();
   }
   public render() {
     return (<div>
@@ -49,7 +52,7 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
     </div>);
   }
 
-  private renderForm(): any {
+  private renderForm(): JSX.Element {
     return (<div>
       <Stack>
         <TextField label="Title" value={this.state.Title} onChanged={inputValue =>this._handleTitleOnChange(inputValue)} />
@@ -58,6 +61,11 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
       </div>
     );
   }
+  // public renderGroup(){
+  //   let groups = this.state.groups.map(group =>{
+  //     return <div>{group}</div>
+  //   })
+  // }
   private _handleTitleOnChange(inputValue){
    // console.log(inputValue);
       this.setState({
@@ -71,16 +79,23 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
       });
   }
 
-  public _getPlannerTasks(): void{
-    console.log("planner funk");
-    this._groupServiceManager.getPlannerTasks().then(task =>{
+  public _getGroups(): void{
+    this._groupServiceManager.getGroups().then(group =>{
       this.setState({
-        tasks: task
-      })
-    })
-  
+        groups: group
+      });
+      this. _getPlansForGroup();
+    });
+
   }
 
+  public _getPlansForGroup(){
+
+    let firstGroupID = this.state.groups[1].id;
+    console.log(firstGroupID);
+  
+  }
+ 
   private _closeDialog = (): void => {
     this.setState({ hideDialog: true });
   }

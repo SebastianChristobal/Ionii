@@ -1,21 +1,14 @@
 import { override } from '@microsoft/decorators';
-import { Log } from '@microsoft/sp-core-library';
 import {
   BaseListViewCommandSet,
   Command,
   IListViewCommandSetListViewUpdatedParameters,
   IListViewCommandSetExecuteEventParameters
 } from '@microsoft/sp-listview-extensibility';
-import { Dialog } from '@microsoft/sp-dialog';
-import {
-  IPropertyPaneConfiguration,
-  PropertyPaneTextField
-} from '@microsoft/sp-webpart-base';
 import {sp} from "@pnp/sp";
-import {GroupFormDialog} from '../components/GroupFormDialog';
 
-import * as strings from 'PlannerTaskExtensionCommandSetStrings';
-import GroupService from '../components/services/GroupService';
+
+
 /**
  * If your command set uses the ClientSideComponentProperties JSON input,
  * it will be deserialized into the BaseExtension.properties object.
@@ -40,7 +33,7 @@ export default class PlannerTaskExtensionCommandSet extends BaseListViewCommandS
       sp.setup({
         spfxContext: this.context
       });
-      GroupService.setup(this.properties.context);
+      
     });
   }
   
@@ -56,10 +49,12 @@ export default class PlannerTaskExtensionCommandSet extends BaseListViewCommandS
   @override
   public async onExecute(event: IListViewCommandSetExecuteEventParameters): Promise<void> {
 
+
     const component = await import(
       '../components/GroupFormDialog'
     );
     const dialog = new component.GroupFormDialog;
+    dialog.msGraphFactory = this.context.msGraphClientFactory;
     dialog.show();
   }
 

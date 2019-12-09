@@ -4,7 +4,6 @@ import {ITask} from '../models';
 export interface IFormDialogState {
     groups: MicrosoftGroup.Group[];
     tasks: ITask[];
-
     hideDialog: boolean;
     optionSelected: string;
     myInput: any;
