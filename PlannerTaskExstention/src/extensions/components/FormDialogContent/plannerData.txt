@@ -1,0 +1,22 @@
+@odata.etag: "W/"JzEtVGFzayAgQEBAQEBAQEBAQEBAQEBAWCc=""
+activeChecklistItemCount: 0
+appliedCategories: {}
+assigneePriority: "8586267391765867482Ps"
+assignments: {f4be8305-3b7c-4e04-ab6b-fda34d5cd4fb: {…}}
+bucketId: "bgmR2u0nAkiwBcdzCWXg95cACjTS"
+checklistItemCount: 0
+completedBy: null
+completedDateTime: null
+conversationThreadId: null
+createdBy: {user: {…}}
+createdDateTime: "2019-11-27T15:16:09.0002053Z"
+dueDateTime: "2020-01-04T10:00:00Z"
+hasDescription: true
+id: "M-fqCWmXL0SIN483MZuFs5cAL7Gd"
+orderHint: "8586267391765867482P|"
+percentComplete: 0
+planId: "fvEffTDjp0KQv7m9Oxc6sZcAEiFe"
+previewType: "automatic"
+referenceCount: 0
+startDateTime: null
+title: "Ionii planner task"

@@ -1,4 +1,5 @@
 export interface ITask {
+  ['@odata.type']?:string;
     id?: string;
     title?:string;
     dueDateTime?: string;

@@ -7,7 +7,7 @@ import { Stack } from 'office-ui-fabric-react/lib/Stack';
 import {IFormDialogState} from './IFormDialogState';
 import {IGroupFormDialogProps} from './IGroupFormDialogProps';
 import {GroupServiceManager} from '../../components/services/';
-import { IGroup } from '../models';
+import { IGroup, ITask, IPlannerTaskCollection } from '../models';
 import { ThemeSettingName } from '@uifabric/styling';
 
 
@@ -33,9 +33,10 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
 
    public componentDidMount(){
     this._getGroups();
-    //this._getPlansForGroup();
+    this._getMyPlanners();
   }
   public render() {
+    
     return (<div>
       <DialogContent
         title="My dialog"
@@ -61,11 +62,7 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
       </div>
     );
   }
-  // public renderGroup(){
-  //   let groups = this.state.groups.map(group =>{
-  //     return <div>{group}</div>
-  //   })
-  // }
+
   private _handleTitleOnChange(inputValue){
    // console.log(inputValue);
       this.setState({
@@ -78,24 +75,38 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
           Description: inputValue
       });
   }
-
   public _getGroups(): void{
+    
     this._groupServiceManager.getGroups().then(group =>{
       this.setState({
         groups: group
       });
-      this. _getPlansForGroup();
+    });
+  }
+
+  public _getGroup(): void{
+    let firstGroupID = this.state.groups[1].id;
+    
+    this._groupServiceManager.getGroup(firstGroupID)
+   .then(() =>{});
+  
+  }
+
+  public _getMyPlanners(): void{
+
+    this._groupServiceManager.getPlanners().then(planner =>{
+     // console.log(planner);
     });
 
   }
 
-  public _getPlansForGroup(){
-
-    let firstGroupID = this.state.groups[1].id;
-    console.log(firstGroupID);
-  
+  public _createPlannerTask():void{
+    this.state.tasks.map(task =>{
+      console.log(task);
+    });
+    
   }
- 
+
   private _closeDialog = (): void => {
     this.setState({ hideDialog: true });
   }

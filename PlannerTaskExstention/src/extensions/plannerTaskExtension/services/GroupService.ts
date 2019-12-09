@@ -42,7 +42,7 @@ export class GroupServiceManager {
         .then((client: MSGraphClient) => {
           client.api("/me/memberOf/$/microsoft.graph.group?$filter=groupTypes/any(a:a eq 'unified')")
           .get((error: any, groups: IGroupCollection, rawResponse: any) => {
-           // console.log(groups.value);
+    
             resolve(groups.value);
           });
         });
@@ -51,16 +51,16 @@ export class GroupServiceManager {
       }
     });
   }
-  public getPlansForGroup(groups: IGroup): Promise<MicrosoftGraph.Planner[]>  {
-    return new Promise<MicrosoftGraph.Planner[]>((resolve, reject) => {
+  public getPlansForGroup(groups: IGroup): Promise<MicrosoftGraph.Planner>  {
+    return new Promise<MicrosoftGraph.Planner>((resolve, reject) => {
       try {
         this.context.msGraphClientFactory
         .getClient()
         .then((client: MSGraphClient) => {
           client.api(`/groups/${groups.id}/planner/plans`)
-          .get((error: any, groups: IGroupCollection, rawResponse: any) => {
-            console.log(groups.value);
-            resolve(groups.value);
+          .get((error: any, planner: ITask, rawResponse: any) => {
+            console.log(planner);
+            resolve(planner);
           });
         });
       } catch(error) {
@@ -69,43 +69,43 @@ export class GroupServiceManager {
     });
   }
 
-  public getGroupLinks(groups: IGroup): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-      try {
-        this.context.msGraphClientFactory
-        .getClient()
-        .then((client: MSGraphClient) => {
-          client
-          .api(`/groups/${groups.id}/sites/root/weburl`)
-          .get((error: any, group: any, rawResponse: any) => {
-           // console.log(group);
-            resolve(group);
-          });
-        });
-      } catch(error) {
-        console.error(error);
-      }
-    });
-  }
+  // public getGroupLinks(groups: IGroup): Promise<any> {
+  //   return new Promise<any>((resolve, reject) => {
+  //     try {
+  //       this.context.msGraphClientFactory
+  //       .getClient()
+  //       .then((client: MSGraphClient) => {
+  //         client
+  //         .api(`/groups/${groups.id}/sites/root/weburl`)
+  //         .get((error: any, group: any, rawResponse: any) => {
+  //          // console.log(group);
+  //           resolve(group);
+  //         });
+  //       });
+  //     } catch(error) {
+  //       console.error(error);
+  //     }
+  //   });
+  // }
 
-  public getGroupThumbnails(groups: IGroup): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-      try {
-        this.context.msGraphClientFactory
-        .getClient()
-        .then((client: MSGraphClient) => {
-          client
-          .api(`/groups/${groups.id}/photos/48x48/$value`)
-          .responseType('blob')
-          .get((error: any, group: any, rawResponse: any) => {
-            resolve(window.URL.createObjectURL(group));
-          });
-        });
-      } catch(error) {
-        console.error(error);
-      }
-    });
-  }
+  // public getGroupThumbnails(groups: IGroup): Promise<any> {
+  //   return new Promise<any>((resolve, reject) => {
+  //     try {
+  //       this.context.msGraphClientFactory
+  //       .getClient()
+  //       .then((client: MSGraphClient) => {
+  //         client
+  //         .api(`/groups/${groups.id}/photos/48x48/$value`)
+  //         .responseType('blob')
+  //         .get((error: any, group: any, rawResponse: any) => {
+  //           resolve(window.URL.createObjectURL(group));
+  //         });
+  //       });
+  //     } catch(error) {
+  //       console.error(error);
+  //     }
+  //   });
+  // }
 
 }
 
