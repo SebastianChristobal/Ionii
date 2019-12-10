@@ -51,7 +51,7 @@ export default class PlannerTaskExtensionCommandSet extends BaseListViewCommandS
 
 
     const component = await import(
-      '../components/GroupFormDialog'
+      '../components/GroupDialog/GroupFormDialog'
     );
     const dialog = new component.GroupFormDialog;
     dialog.msGraphFactory = this.context.msGraphClientFactory;

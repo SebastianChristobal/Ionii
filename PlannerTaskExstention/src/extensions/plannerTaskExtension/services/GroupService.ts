@@ -59,7 +59,7 @@ export class GroupServiceManager {
         .then((client: MSGraphClient) => {
           client.api(`/groups/${groups.id}/planner/plans`)
           .get((error: any, planner: ITask, rawResponse: any) => {
-            console.log(planner);
+            //console.log(planner);
             resolve(planner);
           });
         });

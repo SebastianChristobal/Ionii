@@ -3,31 +3,16 @@ import * as ReactDOM from 'react-dom';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { DialogFooter, DialogContent } from 'office-ui-fabric-react/lib/Dialog';
 import { PrimaryButton, DefaultButton } from 'office-ui-fabric-react/lib/Button';
-import { Dropdown, DropdownMenuItemType, IDropdownStyles, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
 import { Stack,IStackTokens } from 'office-ui-fabric-react/lib/Stack';
 import { IFormDialogState } from './IFormDialogState';
 import { IGroupFormDialogProps } from './IGroupFormDialogProps';
-import { GroupServiceManager } from '../../components/services/';
+import { GroupServiceManager } from '../services';
 import { PlannerTask } from '@microsoft/microsoft-graph-types';
+import {GroupDropdownContent} from '../GroupDropDownContent';
 
-
-const dropdownStyles: Partial<IDropdownStyles> = {
-  dropdown: { width: 300 }
-};
-
-
-const stackTokens: IStackTokens = { childrenGap: 20 };
 
 export class FormDialogContent extends React.Component<IGroupFormDialogProps, IFormDialogState>   {
   private _groupServiceManager = new GroupServiceManager(this.props.graphClientFactory);
-
-  public options: IDropdownOption[] = [
-    { key: 'fruitsHeader', text: 'Fruits', itemType: DropdownMenuItemType.Header },
-    { key: 'apple', text: 'Apple' },
-    { key: 'banana', text: 'Banana' },
-    { key: 'orange', text: 'Orange', disabled: true },
-    { key: 'grape', text: 'Grape' }
-  ];
 
   constructor(props: IGroupFormDialogProps) {
     super(props);
@@ -50,28 +35,11 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
   public componentDidMount() {
     this._getGroups();
     this._getMyPlanners();
-    this._getPlanner();
     this._getPlannerBucket();
 
- 
   }
-
-  private _handleTitleOnChange(inputValue) {
-    // console.log(inputValue);
-    this.setState({
-      Title: inputValue
-    });
-  }
-  private _handleDescOnChange(inputValue) {
-    //  console.log(inputValue);
-    this.setState({
-      Description: inputValue
-    });
-  }
-
-
   public render() {
-    console.log(this.state.groups);
+
     return (<div>
       <DialogContent
         title="My dialog"
@@ -89,21 +57,29 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
 
   private renderForm(): JSX.Element {
     return (<div>
-      <Stack tokens={stackTokens}>
-      <Dropdown 
-      placeholder="Select a Group" 
-      label="Select a Group"
-      options={this.options} styles={dropdownStyles} />
+      <Stack>
+        <GroupDropdownContent  {...this.props}/>
         <TextField label="Title" value={this.state.Title} onChanged={inputValue => this._handleTitleOnChange(inputValue)} />
         <TextField label="Description" value={this.state.Description} onChanged={inputValue => this._handleDescOnChange(inputValue)} />
       </Stack>
     </div>
     );
   }
-
+  private _handleTitleOnChange(inputValue) {
+    // console.log(inputValue);
+    this.setState({
+      Title: inputValue
+    });
+  }
+  private _handleDescOnChange(inputValue) {
+    //  console.log(inputValue);
+    this.setState({
+      Description: inputValue
+    });
+  }
   public _createPlanner(): any {
     
-    let planId: string
+    let planId: string;
     let bucketId: string;
 
     this.state.plannerTask.map(item =>{
@@ -126,7 +102,6 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
       }
     };
     this._groupServiceManager.createPlanner(newItem);
-    
   }
 
   public _getMyPlanners(): void {
@@ -144,11 +119,6 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
      });
     });
   }
-  public _getPlanner(): void {
-    let myPlanner = this.state.plannerTask;
-   
-  }
-
   public _getGroup(): void {
     let firstGroupID = this.state.groups[1].id;
     this._groupServiceManager.getGroup(firstGroupID)

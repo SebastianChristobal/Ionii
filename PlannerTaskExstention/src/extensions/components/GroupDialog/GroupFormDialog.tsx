@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { BaseDialog } from '@microsoft/sp-dialog';
-import {FormDialogContent} from './FormDialogContent/FormDialogContent';
+import {FormDialogContent} from '../GroupDialogContent/FormDialogContent';
 import { MSGraphClientFactory } from '@microsoft/sp-http';
 
 export class GroupFormDialog extends BaseDialog {
