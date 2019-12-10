@@ -16,6 +16,7 @@ export class GroupServiceManager {
 
   @autobind
   public getPlanners(): Promise<MicrosoftGraph.PlannerTask[]>  {
+    
     return new Promise<MicrosoftGraph.PlannerTask[]>((resolve, reject) => {
       try {
         this._msGraphClientFactory
@@ -23,7 +24,24 @@ export class GroupServiceManager {
         .then((client: MSGraphClient) => {
           client.api("me/planner/tasks/")
           .get((error: any, plannerTask: ITaskCollection, rawResponse: any) => {
-           console.log(plannerTask.value);
+            resolve(plannerTask.value);
+          });
+        });
+      } catch(error) {
+        console.error(error);
+      }
+    });
+  }
+  @autobind
+  public getPlannerBucket(): Promise<MicrosoftGraph.PlannerBucket[]>  {
+    
+    return new Promise<MicrosoftGraph.PlannerBucket[]>((resolve, reject) => {
+      try {
+        this._msGraphClientFactory
+        .getClient()
+        .then((client: MSGraphClient) => {
+          client.api("me/planner/tasks/")
+          .get((error: any, plannerTask: ITaskCollection, rawResponse: any) => {
             resolve(plannerTask.value);
           });
         });
@@ -35,7 +53,7 @@ export class GroupServiceManager {
 
   @autobind
   public createPlanner(newItem: MicrosoftGraph.PlannerTask):Promise<any>{
-
+    console.log(newItem);
       return new Promise<any>((resolve, reject) =>{
           try{
             this._msGraphClientFactory
@@ -61,6 +79,7 @@ export class GroupServiceManager {
         .then((client: MSGraphClient) => {
           client.api("/me/memberOf/$/microsoft.graph.group?$filter=groupTypes/any(a:a eq 'unified')")
           .get((error: any, groups: IGroupCollection, rawResponse: any) => {
+           // console.log(groups.value);
             resolve(groups.value);
           });
         });

@@ -5,6 +5,7 @@ export interface ITask {
     dueDateTime?: string;
     createdDateTime?: string;
     planId?: string;
+    bucketId?: string;
   }
   
   export interface ITaskCollection {
