@@ -39,16 +39,17 @@ export class GroupServiceManager {
       return new Promise<any>((resolve, reject) =>{
           try{
             this._msGraphClientFactory
-            .getClient().then((client: MSGraphClient) =>{
-              client.api('/planner/tasks')
-              .post(JSON.stringify(newItem), ()=>{
+            .getClient()
+            .then((client: MSGraphClient) =>{
+            client.api('/planner/tasks')
+            .post(JSON.stringify(newItem), ()=>{
                 resolve(undefined);
-              })
-            })
+              });
+            });
           }catch(error){
             console.error(error);
           }
-      })
+      });
   }
  
   @autobind

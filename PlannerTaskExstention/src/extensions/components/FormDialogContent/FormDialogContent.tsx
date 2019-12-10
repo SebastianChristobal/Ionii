@@ -85,7 +85,7 @@ public _createPlanner(): any{
    const newItem: PlannerTask = {
     title:this.state.Title,
     planId: "fvEffTDjp0KQv7m9Oxc6sZcAEiFe"
-   }
+   };
    this._groupServiceManager.createPlanner(newItem);
 
 }
