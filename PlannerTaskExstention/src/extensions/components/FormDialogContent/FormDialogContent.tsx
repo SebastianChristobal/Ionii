@@ -7,8 +7,10 @@ import { Stack } from 'office-ui-fabric-react/lib/Stack';
 import {IFormDialogState} from './IFormDialogState';
 import {IGroupFormDialogProps} from './IGroupFormDialogProps';
 import {GroupServiceManager} from '../../components/services/';
-import { IGroup, ITask, IPlannerTaskCollection } from '../models';
+import { ITaskCollection } from '../models';
 import { ThemeSettingName } from '@uifabric/styling';
+import { ITask } from '../../plannerTaskExtension/models';
+import { PlannerTask } from '@microsoft/microsoft-graph-types';
 
 
 export class FormDialogContent extends React.Component<IGroupFormDialogProps, IFormDialogState>   {
@@ -20,7 +22,7 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
 
     this.state = {
       groups: [],
-      tasks:[],
+      plannerTask:[],
       hideDialog: false,
       optionSelected: '',
       myInput: '',
@@ -29,14 +31,29 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
     };
 
     this._handleTitleOnChange = this._handleTitleOnChange.bind(this);
+    this._createPlanner = this._createPlanner.bind(this);
   }
-
    public componentDidMount(){
     this._getGroups();
     this._getMyPlanners();
+    this._getPlanner();
   }
+
+  private _handleTitleOnChange(inputValue){
+    // console.log(inputValue);
+       this.setState({
+           Title: inputValue
+       });
+   }
+   private _handleDescOnChange(inputValue){
+   //  console.log(inputValue);
+       this.setState({
+           Description: inputValue
+       });
+   }
+ 
+
   public render() {
-    
     return (<div>
       <DialogContent
         title="My dialog"
@@ -46,7 +63,7 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
       >
         {this.renderForm()}
         <DialogFooter>
-          <PrimaryButton onClick={this._closeDialog} text="Send"/>
+          <PrimaryButton onClick={this._createPlanner} text="Send"/>
           <DefaultButton onClick={this._closeDialog} text="Don't send" />
         </DialogFooter>
       </DialogContent>
@@ -63,50 +80,37 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
     );
   }
 
-  private _handleTitleOnChange(inputValue){
-   // console.log(inputValue);
-      this.setState({
-          Title: inputValue
-      });
+public _createPlanner(): any{
+  
+   const newItem: PlannerTask = {
+    title:this.state.Title,
+    planId: "fvEffTDjp0KQv7m9Oxc6sZcAEiFe"
+   }
+   this._groupServiceManager.createPlanner(newItem);
+
+}
+
+  public _getMyPlanners(): void{
+    this._groupServiceManager.getPlanners().then(plannerTasks =>{});
   }
-  private _handleDescOnChange(inputValue){
-  //  console.log(inputValue);
-      this.setState({
-          Description: inputValue
-      });
+  public _getPlanner():void{
+    let myPlanner = this.state.plannerTask;
+    console.log(myPlanner);
   }
+
+  public _getGroup(): void{
+    let firstGroupID = this.state.groups[1].id;
+    this._groupServiceManager.getGroup(firstGroupID)
+   .then(() =>{});
+  }
+
   public _getGroups(): void{
-    
     this._groupServiceManager.getGroups().then(group =>{
       this.setState({
         groups: group
       });
     });
   }
-
-  public _getGroup(): void{
-    let firstGroupID = this.state.groups[1].id;
-    
-    this._groupServiceManager.getGroup(firstGroupID)
-   .then(() =>{});
-  
-  }
-
-  public _getMyPlanners(): void{
-
-    this._groupServiceManager.getPlanners().then(planner =>{
-     // console.log(planner);
-    });
-
-  }
-
-  public _createPlannerTask():void{
-    this.state.tasks.map(task =>{
-      console.log(task);
-    });
-    
-  }
-
   private _closeDialog = (): void => {
     this.setState({ hideDialog: true });
   }

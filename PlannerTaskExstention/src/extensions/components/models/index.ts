@@ -1,2 +1,3 @@
 export * from './IGroup';
-export * from './IPlannerTask';
+export * from './ITask';
+export * from './IPlanner';

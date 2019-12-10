@@ -25,7 +25,7 @@ export class GroupServiceManager {
         .then((client: MSGraphClient) => {
           client.api("/me/planner/tasks")
           .get((error: any, planner: IPlannerTaskCollection, rawResponse: any) => {
-            console.log(planner.value);
+         //console.log(planner.value);
             resolve(planner.value);
           });
         });

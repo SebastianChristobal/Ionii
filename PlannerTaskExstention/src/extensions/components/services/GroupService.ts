@@ -2,7 +2,7 @@ import * as MicrosoftGraph from "@microsoft/microsoft-graph-types";
 import { 
   IGroup, 
   IGroupCollection, 
-  IPlannerTaskCollection,
+  ITaskCollection,
   ITask
  } from "../models";
 import { MSGraphClientFactory, MSGraphClient } from "@microsoft/sp-http";
@@ -15,16 +15,16 @@ export class GroupServiceManager {
   }
 
   @autobind
-  public getPlanners(): Promise<MicrosoftGraph.Planner[]>  {
-    return new Promise<MicrosoftGraph.Planner[]>((resolve, reject) => {
+  public getPlanners(): Promise<MicrosoftGraph.PlannerTask[]>  {
+    return new Promise<MicrosoftGraph.PlannerTask[]>((resolve, reject) => {
       try {
         this._msGraphClientFactory
         .getClient()
         .then((client: MSGraphClient) => {
           client.api("me/planner/tasks/")
-          .get((error: any, planner: IPlannerTaskCollection, rawResponse: any) => {
-            //sconsole.log(planner.value);
-            resolve(planner.value);
+          .get((error: any, plannerTask: ITaskCollection, rawResponse: any) => {
+           console.log(plannerTask.value);
+            resolve(plannerTask.value);
           });
         });
       } catch(error) {
@@ -32,6 +32,25 @@ export class GroupServiceManager {
       }
     });
   }
+
+  @autobind
+  public createPlanner(newItem: MicrosoftGraph.PlannerTask):Promise<any>{
+
+      return new Promise<any>((resolve, reject) =>{
+          try{
+            this._msGraphClientFactory
+            .getClient().then((client: MSGraphClient) =>{
+              client.api('/planner/tasks')
+              .post(JSON.stringify(newItem), ()=>{
+                resolve(undefined);
+              })
+            })
+          }catch(error){
+            console.error(error);
+          }
+      })
+  }
+ 
   @autobind
   public getGroups(): Promise<MicrosoftGraph.Group[]>  {
     return new Promise<MicrosoftGraph.Group[]>((resolve, reject) => {
@@ -85,8 +104,6 @@ export class GroupServiceManager {
       }
     });
   }
-
-
   // public getGroupLinks(groups: IGroup): Promise<any> {
   //   return new Promise<any>((resolve, reject) => {
   //     try {
