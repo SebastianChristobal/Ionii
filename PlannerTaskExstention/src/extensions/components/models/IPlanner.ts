@@ -1,8 +1,8 @@
 export interface IPlanner {
+  ['@odata.etag']?: string;
     id: string;
     title:string;
-    dueDateTime: string;
-    createdDateTime: string;
+    createdDateTime?: string;
   }
   
   export interface IPlannerCollection {

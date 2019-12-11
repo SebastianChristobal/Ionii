@@ -1,3 +1,3 @@
 export * from './IGroup';
-export * from './ITask';
 export * from './IPlanner';
+export * from './ITask';

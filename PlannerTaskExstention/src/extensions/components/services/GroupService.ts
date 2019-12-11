@@ -3,7 +3,9 @@ import {
   IGroup, 
   IGroupCollection, 
   ITaskCollection,
-  ITask
+  ITask,
+  IPlannerCollection,
+  IPlanner
  } from "../models";
 import { MSGraphClientFactory, MSGraphClient } from "@microsoft/sp-http";
 import { autobind } from "@uifabric/utilities";
@@ -50,6 +52,42 @@ export class GroupServiceManager {
       }
     });
   }
+  @autobind
+  public getPlanner(groupID: string): Promise<MicrosoftGraph.Planner[]>  {
+    return new Promise<MicrosoftGraph.Planner[]>((resolve, reject) => {
+      try {
+        this._msGraphClientFactory
+        .getClient()
+        .then((client: MSGraphClient) => {
+          client.api(`groups/${groupID}/planner/plans`)
+          .get((error: any, group: IPlannerCollection, rawResponse: any) => {
+            console.log(group.value)
+            resolve(group.value);
+          });
+        });
+      } catch(error) {
+        console.error(error);
+      }
+    });
+  }
+  public getPlannerBucketId(groupID: string): Promise<MicrosoftGraph.Planner[]>  {
+    return new Promise<MicrosoftGraph.Planner[]>((resolve, reject) => {
+      try {
+        this._msGraphClientFactory
+        .getClient()
+        .then((client: MSGraphClient) => {
+          client.api(`groups/${groupID}/planner/plans`)
+          .get((error: any, group: IPlannerCollection, rawResponse: any) => {
+            console.log(group)
+            resolve(group.value);
+          });
+        });
+      } catch(error) {
+        console.error(error);
+      }
+    });
+  }
+
 
   @autobind
   public createPlanner(newItem: MicrosoftGraph.PlannerTask):Promise<any>{

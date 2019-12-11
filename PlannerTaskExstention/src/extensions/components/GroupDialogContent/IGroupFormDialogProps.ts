@@ -1,7 +1,8 @@
 import { MSGraphClientFactory} from "@microsoft/sp-http";
 
 export interface IGroupFormDialogProps {
-    close: () => void;
+    close?: () => void;
     graphClientFactory: MSGraphClientFactory;
+  
   }
   

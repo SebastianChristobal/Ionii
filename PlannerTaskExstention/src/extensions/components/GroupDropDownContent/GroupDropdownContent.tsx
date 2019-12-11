@@ -5,7 +5,7 @@ import { Stack, IStackTokens } from 'office-ui-fabric-react/lib/Stack';
 import { GroupServiceManager } from '../services';
 import { IGroupDropdownContentProps } from './IGroupDropdownContentProps';
 import { IGroupDropdownContentState } from './IGroupDropdownContentState';
-import { SPSharedObjectType } from '@pnp/sp';
+
 
 const dropdownStyles: Partial<IDropdownStyles> = {
   dropdown: { width: 300 }
@@ -22,7 +22,8 @@ export class GroupDropdownContent extends React.Component<IGroupDropdownContentP
 
     this.state = {
       groups: [],
-      options: []
+      options: [],
+      dropDownValue: []
     };
   }
   public componentDidMount() {
@@ -36,6 +37,7 @@ export class GroupDropdownContent extends React.Component<IGroupDropdownContentP
         <Dropdown
           placeholder="Klicka här"
           label="Välj Teams"
+          children={this.state}
           options={this.state.options}
           onChanged={dropDownValue => this._handleSelectedGroup(dropDownValue)}
           styles={dropdownStyles} />
@@ -43,7 +45,11 @@ export class GroupDropdownContent extends React.Component<IGroupDropdownContentP
     </div>);
   }
   public _handleSelectedGroup(dropDownValue) {
-    console.log(dropDownValue);
+   
+    this.setState({
+      dropDownValue: dropDownValue
+    })
+    this.props.onSelectedValue(dropDownValue);
   }
   public _renderAllGroups() {
     let myItem: IDropdownOption[] = [];
@@ -56,6 +62,7 @@ export class GroupDropdownContent extends React.Component<IGroupDropdownContentP
     this.setState({
       options: myItem
     })
+  
   }
   public _getGroups(): void {
     this._groupServiceManager.getGroups().then(group => {
@@ -64,6 +71,6 @@ export class GroupDropdownContent extends React.Component<IGroupDropdownContentP
       });
       this._renderAllGroups();
     });
-
+    
   }
 }

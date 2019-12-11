@@ -1,11 +1,10 @@
 export interface ITask {
-  ['@odata.etag']?: string;
-    id?: string;
-    title?:string;
-    dueDateTime?: string;
-    createdDateTime?: string;
-    planId?: string;
-    bucketId?: string;
+    id: string;
+    title:string;
+    dueDateTime: string;
+    createdDateTime: string;
+ 
+
   }
   
   export interface ITaskCollection {
