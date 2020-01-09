@@ -3,14 +3,13 @@ import * as ReactDOM from 'react-dom';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { DialogFooter, DialogContent } from 'office-ui-fabric-react/lib/Dialog';
 import { PrimaryButton, DefaultButton } from 'office-ui-fabric-react/lib/Button';
-import { Stack, IStackTokens } from 'office-ui-fabric-react/lib/Stack';
+import { Stack} from 'office-ui-fabric-react/lib/Stack';
 import { IFormDialogState } from './IFormDialogState';
 import { IGroupFormDialogProps } from './IGroupFormDialogProps';
 import { GroupServiceManager } from '../services';
 import { PlannerTask } from '@microsoft/microsoft-graph-types';
 import { GroupDropdownContent } from '../GroupDropDownContent';
-import { Dropdown, DropdownMenuItemType, IDropdownStyles, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
-import { IPlanner, IPlannerBucketCollection } from '../models';
+
 
 export class FormDialogContent extends React.Component<IGroupFormDialogProps, IFormDialogState>   {
   private _groupServiceManager = new GroupServiceManager(this.props.graphClientFactory);
@@ -24,12 +23,14 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
       planner:[],
       plannerBucket: [],
       hideDialog: false,
-      Title: '',
-      Description: '',
+      title: '',
+      description: '',
       groupID: ''
     };
 
     this._handleTitleOnChange = this._handleTitleOnChange.bind(this);
+    this._handleDescOnChange = this._handleDescOnChange.bind(this);
+
     this._createPlanner = this._createPlanner.bind(this);
    
   }
@@ -55,22 +56,22 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
     return (<div>
       <Stack>
         <GroupDropdownContent {...this.props} onSelectedValue={this.handleDropdownValue.bind(this)} />
-        <TextField label="Title" value={this.state.Title} onChanged={inputValue => this._handleTitleOnChange(inputValue)} />
-        <TextField label="Description" value={this.state.Description} onChanged={inputValue => this._handleDescOnChange(inputValue)} />
+        <TextField label="Title" value={this.state.title} onChange={this._handleTitleOnChange} />
+        <TextField label="Description" value={this.state.description} onChange={this._handleDescOnChange} />
       </Stack>
     </div>
     );
   }
   private _handleTitleOnChange(inputValue) {
-    //  console.log(inputValue);
+      console.log(inputValue.target.value);
     this.setState({
-      Title: inputValue
+      title: inputValue.target.value
     });
   }
   private _handleDescOnChange(inputValue) {
-    //   console.log(inputValue);
+    console.log(inputValue.target.value);
     this.setState({
-      Description: inputValue
+      description: inputValue.target.value
     });
   }
 
@@ -96,9 +97,9 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
 
     //console.log("BucketID: " + bucketId + "," + "PlanID: " + planId);
     const newItem: PlannerTask = {
-      title: this.state.Title,
+      title: this.state.title,
       details: {
-        description: this.state.Description
+        description: this.state.description
       },
       planId: planId,
       bucketId: bucketId,

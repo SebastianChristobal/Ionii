@@ -6,7 +6,7 @@ export interface IFormDialogState {
     plannerTask: MicrosoftGroup.PlannerTask[];
     plannerBucket: MicrosoftGroup.PlannerBucket[];
     hideDialog: boolean;
-    Title: string;
-    Description: string;
+    title: string;
+    description: string;
     groupID: string;
 }
