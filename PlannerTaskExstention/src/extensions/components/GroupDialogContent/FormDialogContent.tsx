@@ -10,6 +10,7 @@ import { GroupServiceManager } from '../services';
 import { PlannerTask } from '@microsoft/microsoft-graph-types';
 import { GroupDropdownContent } from '../GroupDropDownContent';
 import { Dropdown, DropdownMenuItemType, IDropdownStyles, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
+import { IPlanner, IPlannerBucketCollection } from '../models';
 
 export class FormDialogContent extends React.Component<IGroupFormDialogProps, IFormDialogState>   {
   private _groupServiceManager = new GroupServiceManager(this.props.graphClientFactory);
@@ -20,8 +21,8 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
     this.state = {
       groups: [],
       plannerTask: [],
-      plannerBucket: [],
       planner:[],
+      plannerBucket: [],
       hideDialog: false,
       Title: '',
       Description: '',
@@ -30,15 +31,9 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
 
     this._handleTitleOnChange = this._handleTitleOnChange.bind(this);
     this._createPlanner = this._createPlanner.bind(this);
-    //this.getPlanner = this.getPlanner.bind(this);
-
+   
   }
-  public componentDidMount() {
-    this._getGroups();
-    this._getMyPlanners();
-    this._getPlannerBucket();
-
-  }
+ 
   public render() {
     
     return (<div>
@@ -66,17 +61,6 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
     </div>
     );
   }
-  public handleDropdownValue({key, text}) {
-    this.setState({
-      groupID: key
-    })
-    this.getPlanner();
-  }
-  public getPlanner() {
-
-    this._groupServiceManager.getPlanner(this.state.groupID)
-    .then(() =>{})
-  }
   private _handleTitleOnChange(inputValue) {
     //  console.log(inputValue);
     this.setState({
@@ -89,16 +73,28 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
       Description: inputValue
     });
   }
-  public _createPlanner(): any {
 
+  public handleDropdownValue({key, text}) {
+   
+    if(key != null){
+ 
+     this._groupServiceManager.getPlannerBucket(key).then(bucket =>{
+       this.setState({
+         plannerBucket: bucket
+       });
+     });
+  }
+}
+  public _createPlanner(): any {
     let planId: string;
     let bucketId: string;
 
-    this.state.plannerTask.map(item => {
-      bucketId = item.bucketId;
-      planId = item.planId;
+    this.state.plannerBucket.map(bucketItems =>{
+      planId = bucketItems.planId;
+      bucketId = bucketItems.id;
     });
 
+    //console.log("BucketID: " + bucketId + "," + "PlanID: " + planId);
     const newItem: PlannerTask = {
       title: this.state.Title,
       details: {
@@ -116,33 +112,6 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
     this._groupServiceManager.createPlanner(newItem);
   }
 
-  public _getMyPlanners(): void {
-    this._groupServiceManager.getPlanners().then(planner => {
-      this.setState({
-        plannerTask: planner
-      });
-    });
-  }
-  public _getPlannerBucket(): void {
-    this._groupServiceManager.getPlannerBucket().then(plannerBucket => {
-      this.setState({
-        plannerBucket: plannerBucket
-      });
-    });
-  }
-  public _getGroup(): void {
-    let firstGroupID = this.state.groups[1].id;
-    this._groupServiceManager.getGroup(firstGroupID)
-      .then(() => {});
-  }
-
-  public _getGroups(): void {
-    this._groupServiceManager.getGroups().then(group => {
-      this.setState({
-        groups: group
-      });
-    });
-  }
   private _closeDialog = (): void => {
     this.setState({ hideDialog: true });
   }

@@ -51,23 +51,23 @@ export class GroupServiceManager {
       }
     });
   }
-  public getPlansForGroup(groups: IGroup): Promise<MicrosoftGraph.Planner>  {
-    return new Promise<MicrosoftGraph.Planner>((resolve, reject) => {
-      try {
-        this.context.msGraphClientFactory
-        .getClient()
-        .then((client: MSGraphClient) => {
-          client.api(`/groups/${groups.id}/planner/plans`)
-          .get((error: any, planner: ITask, rawResponse: any) => {
-            //console.log(planner);
-            resolve(planner);
-          });
-        });
-      } catch(error) {
-        console.error(error);
-      }
-    });
-  }
+  // public getPlansForGroup(groups: IGroup): Promise<MicrosoftGraph.Planner>  {
+  //   return new Promise<MicrosoftGraph.Planner>((resolve, reject) => {
+  //     try {
+  //       this.context.msGraphClientFactory
+  //       .getClient()
+  //       .then((client: MSGraphClient) => {
+  //         client.api(`/groups/${groups.id}/planner/plans`)
+  //         .get((error: any, planner: ITask, rawResponse: any) => {
+  //           //console.log(planner);
+  //           resolve(planner);
+  //         });
+  //       });
+  //     } catch(error) {
+  //       console.error(error);
+  //     }
+  //   });
+  // }
 
   // public getGroupLinks(groups: IGroup): Promise<any> {
   //   return new Promise<any>((resolve, reject) => {

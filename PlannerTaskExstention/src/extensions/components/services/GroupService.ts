@@ -9,6 +9,7 @@ import {
  } from "../models";
 import { MSGraphClientFactory, MSGraphClient } from "@microsoft/sp-http";
 import { autobind } from "@uifabric/utilities";
+import { IPlannerBucketCollection } from "../models/IPlannerBucket";
 
 
 export class GroupServiceManager {
@@ -17,16 +18,56 @@ export class GroupServiceManager {
   }
 
   @autobind
-  public getPlanners(): Promise<MicrosoftGraph.PlannerTask[]>  {
+  public getPlanners(plannerID: string): Promise<MicrosoftGraph.PlannerPlan[]>  {
     
-    return new Promise<MicrosoftGraph.PlannerTask[]>((resolve, reject) => {
+    return new Promise<MicrosoftGraph.PlannerPlan[]>((resolve, reject) => {
       try {
         this._msGraphClientFactory
         .getClient()
         .then((client: MSGraphClient) => {
-          client.api("me/planner/tasks/")
-          .get((error: any, plannerTask: ITaskCollection, rawResponse: any) => {
-            resolve(plannerTask.value);
+          client.api(`groups/${plannerID}/planner/plans`)
+          .get((error: any, planner: IPlannerCollection, rawResponse: any) => {
+         
+            resolve(planner.value);
+          });
+        });
+      } catch(error) {
+        console.error(error);
+      }
+    });
+  }
+
+  @autobind
+  public getPlanner(groupID: string): Promise<MicrosoftGraph.Planner[]>  {
+  
+    
+    return new Promise<MicrosoftGraph.Planner[]>((resolve, reject) => {
+      try {
+        this._msGraphClientFactory
+        .getClient()
+        .then((client: MSGraphClient) => {
+          client.api(`groups/${groupID}/planner/plans`)
+          .get((error: any, planner: IPlannerCollection, rawResponse: any) => {
+      
+            resolve(planner.value);
+          });
+        });
+      } catch(error) {
+        console.error(error);
+      }
+    });
+  }
+
+  public recentPlans(): Promise<MicrosoftGraph.PlannerPlan[]>  {
+    return new Promise<MicrosoftGraph.PlannerPlan[]>((resolve, reject) => {
+      try {
+        this._msGraphClientFactory
+        .getClient()
+        .then((client: MSGraphClient) => {
+          client.api('/me/planner/recentPlans').version('beta')
+          .get((error: any, plans: IPlannerCollection, rawResponse: any) => {
+       
+            resolve(plans.value);
           });
         });
       } catch(error) {
@@ -35,51 +76,17 @@ export class GroupServiceManager {
     });
   }
   @autobind
-  public getPlannerBucket(): Promise<MicrosoftGraph.PlannerBucket[]>  {
-    
+  public getPlannerBucket(groupID: string): Promise<MicrosoftGraph.PlannerBucket[]>  {
+
     return new Promise<MicrosoftGraph.PlannerBucket[]>((resolve, reject) => {
       try {
         this._msGraphClientFactory
         .getClient()
         .then((client: MSGraphClient) => {
-          client.api("me/planner/tasks/")
-          .get((error: any, plannerTask: ITaskCollection, rawResponse: any) => {
-            resolve(plannerTask.value);
-          });
-        });
-      } catch(error) {
-        console.error(error);
-      }
-    });
-  }
-  @autobind
-  public getPlanner(groupID: string): Promise<MicrosoftGraph.Planner[]>  {
-    return new Promise<MicrosoftGraph.Planner[]>((resolve, reject) => {
-      try {
-        this._msGraphClientFactory
-        .getClient()
-        .then((client: MSGraphClient) => {
-          client.api(`groups/${groupID}/planner/plans`)
-          .get((error: any, group: IPlannerCollection, rawResponse: any) => {
-            console.log(group.value)
-            resolve(group.value);
-          });
-        });
-      } catch(error) {
-        console.error(error);
-      }
-    });
-  }
-  public getPlannerBucketId(groupID: string): Promise<MicrosoftGraph.Planner[]>  {
-    return new Promise<MicrosoftGraph.Planner[]>((resolve, reject) => {
-      try {
-        this._msGraphClientFactory
-        .getClient()
-        .then((client: MSGraphClient) => {
-          client.api(`groups/${groupID}/planner/plans`)
-          .get((error: any, group: IPlannerCollection, rawResponse: any) => {
-            console.log(group)
-            resolve(group.value);
+          client.api(`planner/plans/${groupID}/buckets`)
+          .get((error: any, plannerBucket: IPlannerBucketCollection, rawResponse: any) => {
+            console.log(plannerBucket.value);
+            resolve(plannerBucket.value);
           });
         });
       } catch(error) {

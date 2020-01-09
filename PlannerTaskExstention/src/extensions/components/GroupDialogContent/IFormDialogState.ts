@@ -1,4 +1,4 @@
-import {IPlannerCollection} from '../models'
+import {IPlannerCollection, IPlannerBucketCollection} from '../models';
 import * as MicrosoftGroup from '@microsoft/microsoft-graph-types';
 export interface IFormDialogState {
     groups: MicrosoftGroup.Group[];

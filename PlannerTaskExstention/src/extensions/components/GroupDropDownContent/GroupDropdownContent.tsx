@@ -5,6 +5,7 @@ import { Stack, IStackTokens } from 'office-ui-fabric-react/lib/Stack';
 import { GroupServiceManager } from '../services';
 import { IGroupDropdownContentProps } from './IGroupDropdownContentProps';
 import { IGroupDropdownContentState } from './IGroupDropdownContentState';
+import { IPlannerCollection, IPlanner } from '../models';
 
 
 const dropdownStyles: Partial<IDropdownStyles> = {
@@ -23,21 +24,21 @@ export class GroupDropdownContent extends React.Component<IGroupDropdownContentP
     this.state = {
       groups: [],
       options: [],
-      dropDownValue: []
+      dropDownValue: [],
+      recentPlans:[],
     };
   }
   public componentDidMount() {
-    this._getGroups();
+    this._recentPlans();
   }
 
   public render() {
-
+    this._renderRecentPlans();
     return (<div>
       <Stack tokens={stackTokens}>
         <Dropdown
           placeholder="Klicka här"
-          label="Välj Teams"
-          children={this.state}
+          label="Välj Planner"
           options={this.state.options}
           onChanged={dropDownValue => this._handleSelectedGroup(dropDownValue)}
           styles={dropdownStyles} />
@@ -45,32 +46,50 @@ export class GroupDropdownContent extends React.Component<IGroupDropdownContentP
     </div>);
   }
   public _handleSelectedGroup(dropDownValue) {
-   
+
     this.setState({
       dropDownValue: dropDownValue
-    })
+    });
     this.props.onSelectedValue(dropDownValue);
   }
-  public _renderAllGroups() {
-    let myItem: IDropdownOption[] = [];
-    this.state.groups.map(group => {
-      myItem.push({
-        key: group.id,
-        text: group.displayName
-      })
+
+  public _recentPlans(): void{
+    this._groupServiceManager.recentPlans().then( recentPlans =>{
+
+      let dropDownValue: IDropdownOption[] = [];
+
+      recentPlans.map(plans =>{
+        dropDownValue.push({
+          key: plans.id,
+          text: plans.title
+        });
+      });
+
+      this.setState({
+        options: dropDownValue
+      });
     });
-    this.setState({
-      options: myItem
-    })
   
   }
-  public _getGroups(): void {
-    this._groupServiceManager.getGroups().then(group => {
-      this.setState({
-        groups: group
+
+  public _renderRecentPlans(): void{
+
+    let dropDownValue: IDropdownOption[] = [];
+  
+     if(this.state.recentPlans.length != 0){
+
+      this.state.recentPlans.map(plans =>{
+
+        dropDownValue.push({
+          key: plans.id,
+          text: plans.title
+        });
+
       });
-      this._renderAllGroups();
-    });
-    
+       this.setState({
+         options: dropDownValue
+       });
+      
+     }
   }
 }

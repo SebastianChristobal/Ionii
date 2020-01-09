@@ -1,10 +1,10 @@
+import * as MicrosoftGroup from '@microsoft/microsoft-graph-types';
 export interface IPlanner {
   ['@odata.etag']?: string;
-    id: string;
+    id?: string;
     title:string;
-    createdDateTime?: string;
   }
   
   export interface IPlannerCollection {
-    value: IPlanner[];
+    value: MicrosoftGroup.PlannerPlan[];
   }
