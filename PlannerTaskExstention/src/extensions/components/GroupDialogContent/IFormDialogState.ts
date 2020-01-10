@@ -9,4 +9,6 @@ export interface IFormDialogState {
     title: string;
     description: string;
     groupID: string;
+    firstDayOfWeek: number;
+    dueDate: string;
 }

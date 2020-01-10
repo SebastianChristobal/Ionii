@@ -5,7 +5,8 @@ import { Stack, IStackTokens } from 'office-ui-fabric-react/lib/Stack';
 import { GroupServiceManager } from '../services';
 import { IGroupDropdownContentProps } from './IGroupDropdownContentProps';
 import { IGroupDropdownContentState } from './IGroupDropdownContentState';
-import { IPlannerCollection, IPlanner } from '../models';
+
+
 
 
 const dropdownStyles: Partial<IDropdownStyles> = {
