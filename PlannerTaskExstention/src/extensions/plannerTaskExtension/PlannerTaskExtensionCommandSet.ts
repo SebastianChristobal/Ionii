@@ -5,7 +5,7 @@ import {
   IListViewCommandSetListViewUpdatedParameters,
   IListViewCommandSetExecuteEventParameters
 } from '@microsoft/sp-listview-extensibility';
-import {sp} from "@pnp/sp";
+import { sp } from "@pnp/sp";
 
 
 
@@ -33,10 +33,10 @@ export default class PlannerTaskExtensionCommandSet extends BaseListViewCommandS
       sp.setup({
         spfxContext: this.context
       });
-      
+
     });
   }
-  
+
   @override
   public onListViewUpdated(event: IListViewCommandSetListViewUpdatedParameters): void {
     const compareOneCommand: Command = this.tryGetCommand('Planner_Task');
@@ -49,12 +49,15 @@ export default class PlannerTaskExtensionCommandSet extends BaseListViewCommandS
   @override
   public async onExecute(event: IListViewCommandSetExecuteEventParameters): Promise<void> {
 
-
+    const selectedRowId = event.selectedRows[0].getValueByName('ID');
     const component = await import(
       '../components/GroupDialog/GroupFormDialog'
     );
     const dialog = new component.GroupFormDialog;
     dialog.msGraphFactory = this.context.msGraphClientFactory;
+    dialog.spHttpClient = this.context.spHttpClient;
+    dialog.siteUrl = this.context.pageContext.site.absoluteUrl;
+    dialog.selectedRowId = selectedRowId;
     dialog.show();
   }
 

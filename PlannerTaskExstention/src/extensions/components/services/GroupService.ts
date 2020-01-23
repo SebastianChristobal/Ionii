@@ -2,10 +2,7 @@ import * as MicrosoftGraph from "@microsoft/microsoft-graph-types";
 import { 
   IGroup, 
   IGroupCollection, 
-  ITaskCollection,
-  ITask,
-  IPlannerCollection,
-  IPlanner
+  IPlannerCollection
  } from "../models";
 import { MSGraphClientFactory, MSGraphClient } from "@microsoft/sp-http";
 import { autobind } from "@uifabric/utilities";
@@ -85,7 +82,7 @@ export class GroupServiceManager {
         .then((client: MSGraphClient) => {
           client.api(`planner/plans/${groupID}/buckets`)
           .get((error: any, plannerBucket: IPlannerBucketCollection, rawResponse: any) => {
-            console.log(plannerBucket.value);
+           // console.log(plannerBucket.value);
             resolve(plannerBucket.value);
           });
         });
@@ -169,44 +166,6 @@ export class GroupServiceManager {
       }
     });
   }
-  // public getGroupLinks(groups: IGroup): Promise<any> {
-  //   return new Promise<any>((resolve, reject) => {
-  //     try {
-  //       this._msGraphClientFactory
-  //       .getClient()
-  //       .then((client: MSGraphClient) => {
-  //         client
-  //         .api(`/groups/${groups.id}/sites/root/weburl`)
-  //         .get((error: any, group: any, rawResponse: any) => {
-          
-  //           resolve(group);
-  //         });
-  //       });
-  //     } catch(error) {
-  //       console.error(error);
-  //     }
-  //   });
-  // }
-
-  // public getGroupThumbnails(groups: IGroup): Promise<any> {
-  //   return new Promise<any>((resolve, reject) => {
-  //     try {
-  //       this._msGraphClientFactory
-  //       .getClient()
-  //       .then((client: MSGraphClient) => {
-  //         client
-  //         .api(`/groups/${groups.id}/photos/48x48/$value`)
-  //         .responseType('blob')
-  //         .get((error: any, group: any, rawResponse: any) => {
-  //           resolve(window.URL.createObjectURL(group));
-  //         });
-  //       });
-  //     } catch(error) {
-  //       console.error(error);
-  //     }
-  //   });
-  // }
-
 }
 
 

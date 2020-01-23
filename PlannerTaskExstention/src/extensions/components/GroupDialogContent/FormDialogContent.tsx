@@ -6,10 +6,13 @@ import { PrimaryButton, DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { Stack} from 'office-ui-fabric-react/lib/Stack';
 import { IFormDialogState } from './IFormDialogState';
 import { IGroupFormDialogProps } from './IGroupFormDialogProps';
-import { GroupServiceManager } from '../services';
+import { GroupServiceManager,DocLibraryService } from '../services';
 import { PlannerTask } from '@microsoft/microsoft-graph-types';
 import { GroupDropdownContent } from '../GroupDropDownContent';
 import { DatePicker, DayOfWeek, IDatePickerStrings, mergeStyleSets } from 'office-ui-fabric-react';
+import { Icon } from 'office-ui-fabric-react/lib/Icon';
+import {Peoplepicker} from '../Peoplepicker/Peoplepicker';
+import { IPeoplePickerUserItem, IDocument, IDocumentCollection } from '../models';
 
 const DayPickerStrings: IDatePickerStrings = {
   months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -37,6 +40,11 @@ const controlClass = mergeStyleSets({
 
 export class FormDialogContent extends React.Component<IGroupFormDialogProps, IFormDialogState>   {
   private _groupServiceManager = new GroupServiceManager(this.props.graphClientFactory);
+  private _docLibraryServiceManager = new DocLibraryService(this.props.siteUrl, this.props.SPHttpClient);
+
+public componentDidMount(){
+  this._getDocumentBySelectedRowID();
+}
 
   constructor(props: IGroupFormDialogProps) {
     super(props);
@@ -51,7 +59,9 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
       description: '',
       groupID: '',
       firstDayOfWeek: DayOfWeek.Sunday,
-      dueDate: ''
+      dueDate: '',
+      assignedUsers: [],
+      documentItem: []
     };
     //this._handleTitleOnChange = this._handleTitleOnChange.bind(this);
     // this._handleDescOnChange = this._handleDescOnChange.bind(this);
@@ -73,7 +83,6 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
       </DialogContent>
     </div>);
   }
-
   private renderForm(): JSX.Element {
     const { firstDayOfWeek } = this.state;
     return (<div>
@@ -90,17 +99,43 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
           ariaLabel="Select a date"
           onSelectDate={this._handleDate.bind(this)}
         />
+        < Peoplepicker graphClientFactory={this.props.graphClientFactory} onAssignedUsers={this._handleAssignedUser.bind(this)} />
       </Stack>
+      <div>{this.renderDoc()}</div>
     </div>
     );
   }
+  private renderDoc(): JSX.Element{
+    let myItems;
+   
+    this.state.documentItem.map(item =>{
+      myItems = item.Title;
+    });
+    
+  return<div style={{marginTop:'10px'}}><Icon iconName="Attach" /> {myItems}</div>
+  }
+
+  private _handleAssignedUser(value: IPeoplePickerUserItem[]){
+    
+    this.setState({
+      assignedUsers:value
+    });   
+  }
+  private _getDocumentBySelectedRowID(){
+    this._docLibraryServiceManager.getDocument(this.props.selectedRowId).then((item: IDocument[]) =>{
+      
+      this.setState({
+        documentItem: item
+      })
+    })
+  }
+  
   private _handleDate(date){
     //console.log(date);
     this.setState({
       dueDate: date
     });
   }
-
   private _handleTitleOnChange(inputValue) {
     // console.log(inputValue.target.value);
     this.setState({
@@ -122,30 +157,47 @@ export class FormDialogContent extends React.Component<IGroupFormDialogProps, IF
        });
      });
   }
+  else if (key){
+    console.log("Ready");
+  }
 }
   public _createPlanner(): any {
     let planId: string;
     let bucketId: string;
+    let documentUrl: string;
+    let documentTitle: string;
+    let assignmentsObjekt = {};
+
+    this.state.documentItem.map(item =>{
+      documentUrl = item.ServerRedirectedEmbedUri;
+      documentTitle = item.Title
+    });
+
+    let description: string = this.state.description +', ' + `<a href=${documentUrl}>${documentTitle}</a>`;
+
+    this.state.assignedUsers.map((user) =>{
+     assignmentsObjekt[user.id] =  {
+          "@odata.type": "#microsoft.graph.plannerAssignment",
+          "orderHint": " !"
+        };
+    });
+    
 
     this.state.plannerBucket.map(bucketItems =>{
       planId = bucketItems.planId;
       bucketId = bucketItems.id;
     });
     //console.log("BucketID: " + bucketId + "," + "PlanID: " + planId);
+
     const newItem: PlannerTask = {
       title: this.state.title,
       details: {
-        description: this.state.description
+        description: description
       },
       dueDateTime: this.state.dueDate,
       planId: planId,
       bucketId: bucketId,
-      assignments: {
-        "f4be8305-3b7c-4e04-ab6b-fda34d5cd4fb": {
-          "@odata.type": "#microsoft.graph.plannerAssignment",
-          "orderHint": " !"
-        }
-      }
+      assignments: assignmentsObjekt,
     };
     this._groupServiceManager.createPlanner(newItem);
   }

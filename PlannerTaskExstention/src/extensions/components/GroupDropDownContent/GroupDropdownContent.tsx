@@ -41,24 +41,24 @@ export class GroupDropdownContent extends React.Component<IGroupDropdownContentP
           placeholder="Klicka här"
           label="Välj Planner"
           options={this.state.options}
-          onChanged={dropDownValue => this._handleSelectedGroup(dropDownValue)}
+          onChanged={selectedPlanner => this._handleSelectedGroup(selectedPlanner)}
           styles={dropdownStyles} />
       </Stack>
     </div>);
   }
-  public _handleSelectedGroup(dropDownValue) {
+  public _handleSelectedGroup(selectedPlanner) {
 
     this.setState({
-      dropDownValue: dropDownValue
+      dropDownValue: selectedPlanner
     });
-    this.props.onSelectedValue(dropDownValue);
+    this.props.onSelectedValue(selectedPlanner);
   }
 
   public _recentPlans(): void{
     this._groupServiceManager.recentPlans().then( recentPlans =>{
 
       let dropDownValue: IDropdownOption[] = [];
-
+      
       recentPlans.map(plans =>{
         dropDownValue.push({
           key: plans.id,

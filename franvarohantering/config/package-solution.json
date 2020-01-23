@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "franvarohantering-client-side-solution",
+    "id": "c16f5c9b-fd87-4238-966e-8563629ea64f",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false
+  },
+  "paths": {
+    "zippedPackage": "solution/franvarohantering.sppkg"
+  }
+}
