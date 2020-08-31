@@ -1,0 +1,141 @@
+@import '~office-ui-fabric-react/dist/sass/References.scss';
+
+.microbizz {
+  .container {
+    @include ms-xl12;
+    background-color: white;
+    height: 100%;
+  }
+
+  .row {
+    @include ms-Grid-row;
+    @include ms-fontColor-white;
+    background-color: white;
+  }
+  .headerTextRow {
+    @include ms-Grid-row;
+    @include ms-fontColor-white;
+    padding: 20px;
+    background-color: #fbf1e7;
+  }
+
+  .buttonRow{
+    @include ms-md12;
+  }
+
+  .leftColumn {
+    @include ms-Grid-col;
+    @include ms-md10;
+  }
+
+  .rightColumn{
+    @include ms-Grid-col;
+    @include ms-md2;
+
+  }
+
+  .pivotLeftColumn {
+    @include ms-Grid-col;
+    @include ms-md6;
+    font-size: 18px;
+  }
+
+  .pivotRightColumn{
+    @include ms-Grid-col;
+    @include ms-md6;
+}
+
+  .title {
+    @include ms-font-xl;
+    @include ms-fontColor-black;
+  }
+
+  .subTitle {
+    font-size: 22px;
+    font-family: bold;
+    @include ms-fontColor-black;
+  }
+  
+  .TopText {
+    font-family: bold;
+    font-size: 22px;
+    @include ms-fontColor-black;
+  }
+  .pivotNavBar{
+    background-color:#F4F4F4 ;
+  }
+  .description {
+    @include ms-font-l;
+    @include ms-fontColor-black;
+  }
+
+  .button {
+    // Our button
+    text-decoration: none;
+    height: 32px;
+
+    // Primary Button
+    min-width: 80px;
+    background-color: $ms-color-themePrimary;
+    border-color: $ms-color-themePrimary;
+    color: $ms-color-white;
+
+    // Basic Button
+    outline: transparent;
+    position: relative;
+    font-family: "Segoe UI WestEuropean","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: $ms-font-size-m;
+    font-weight: $ms-font-weight-regular;
+    border-width: 0;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 16px;
+
+    .label {
+      font-weight: $ms-font-weight-semibold;
+      font-size: $ms-font-size-m;
+      height: 32px;
+      line-height: 32px;
+      margin: 0 4px;
+      vertical-align: top;
+      display: inline-block;
+    }
+  }
+  .rightButton{
+    margin-left: 10px;
+    text-decoration: none;
+    height: 32px;
+        // Our button
+        text-decoration: none;
+        height: 32px;
+        background-color: forestgreen;
+        // Primary Button
+        min-width: 80px;
+        color: $ms-color-white;
+    
+        // Basic Button
+        outline: transparent;
+        position: relative;
+        font-family: "Segoe UI WestEuropean","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: $ms-font-size-m;
+        font-weight: $ms-font-weight-regular;
+        border-width: 0;
+        text-align: center;
+        cursor: pointer;
+        display: inline-block;
+        padding: 0 16px;
+    
+        .label {
+          font-weight: $ms-font-weight-semibold;
+          font-size: $ms-font-size-m;
+          height: 32px;
+          line-height: 32px;
+          margin: 0 4px;
+          vertical-align: top;
+          display: inline-block;
+        }
+  }
+}

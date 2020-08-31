@@ -1,5 +1,5 @@
 {
-  "name": "franvarohantering",
+  "name": "microbizz",
   "version": "0.0.1",
   "private": true,
   "main": "lib/index.js",
@@ -12,39 +12,32 @@
     "test": "gulp test"
   },
   "dependencies": {
-    "@fullcalendar/core": "^4.4.0",
-    "@fullcalendar/daygrid": "^4.4.0",
-    "@fullcalendar/react": "^4.4.0",
-    "@fullcalendar/resource-daygrid": "^4.4.0",
-    "@fullcalendar/resource-timegrid": "^4.4.0",
     "@microsoft/sp-core-library": "1.9.1",
     "@microsoft/sp-lodash-subset": "1.9.1",
     "@microsoft/sp-office-ui-fabric-core": "1.9.1",
     "@microsoft/sp-webpart-base": "1.9.1",
+    "@pnp/spfx-property-controls": "^1.16.0",
+    "@trendmicro/react-iframe": "^1.0.1",
     "@types/es6-promise": "0.0.33",
     "@types/react": "16.8.8",
     "@types/react-dom": "16.8.3",
     "@types/webpack-env": "1.13.1",
     "office-ui-fabric-react": "6.189.2",
-    "react": "16.8.5",
-    "react-dom": "16.8.5",
-    "uglifyjs-webpack-plugin": "^2.2.0"
+    "react": "^16.8.5",
+    "react-dom": "16.8.5"
   },
   "resolutions": {
     "@types/react": "16.8.8"
   },
   "devDependencies": {
-    "@microsoft/rush-stack-compiler-2.9": "0.7.16",
-    "@microsoft/sp-build-web": "^1.10.0",
-    "@microsoft/sp-module-interfaces": "1.9.1",
+    "@microsoft/sp-build-web": "1.9.1",
     "@microsoft/sp-tslint-rules": "1.9.1",
-    "@microsoft/sp-webpart-workbench": "^1.10.0",
+    "@microsoft/sp-module-interfaces": "1.9.1",
+    "@microsoft/sp-webpart-workbench": "1.9.1",
+    "@microsoft/rush-stack-compiler-2.9": "0.7.16",
+    "gulp": "~3.9.1",
     "@types/chai": "3.4.34",
     "@types/mocha": "2.2.38",
-    "ajv": "~5.2.2",
-    "gulp": "~3.9.1",
-    "node-sass": "^4.13.1",
-    "sass-loader": "^8.0.2",
-    "webpack": "^4.42.0"
+    "ajv": "~5.2.2"
   }
 }

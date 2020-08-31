@@ -4,7 +4,7 @@ import {
     ISPHttpClientOptions
 } from '@microsoft/sp-http';
 
-import {IEvent} from '../models'
+import {IEvent} from '../models';
 import { IPropertyPaneDropdownOption } from '@microsoft/sp-webpart-base';
 export class AbcsenceService{
 
@@ -33,7 +33,7 @@ export class AbcsenceService{
     
     private _getItemEntityType(): Promise<string>{
       
-       console.log(this.client);
+    
         const LIST_API_ENDPOINT: string = `/_api/web/Lists/GetByTitle('Franvarohantering')`;
         let promise: Promise<string> = new Promise<string>((resolve, reject) =>{
             this.client.get(`${this.siteUrl}${LIST_API_ENDPOINT}?$select=ListItemEntityTypeFullName`,
@@ -48,8 +48,8 @@ export class AbcsenceService{
             }).
             catch((error: any) =>{
                 reject(error);
-            })
-        })
+            });
+        });
         return promise;
     }
     public createItem(newItem: IEvent): Promise<void>{
@@ -78,9 +78,35 @@ export class AbcsenceService{
                 resolve();
             }).catch((error: any) =>{
                 reject(error);
-            })
-        })
+            });
+        });
         return promise;
+    }
+    public getlistItems(){
+        const LIST_API_ENDPOINT: string = `/_api/web/Lists/GetByTitle('Franvarohantering')`;
+
+        let promise: Promise<any> = new Promise<any>((resolve, reject)=>{
+
+            this.client.get(`${this.siteUrl}${LIST_API_ENDPOINT}/items`,
+            SPHttpClient.configurations.v1,
+            this._spHttpOptions.getMetaData
+            )
+            .then((respone: SPHttpClientResponse): Promise<any> =>{
+                
+                return respone.json();
+                
+            })
+            .then((item: any) =>{
+               console.log(item.value);
+                resolve(item.value);
+            })
+            .catch((error) =>{
+                reject(error);
+            });
+        });
+
+        return promise;
+
     }
 
 }

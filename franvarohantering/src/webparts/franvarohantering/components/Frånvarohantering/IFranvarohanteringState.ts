@@ -1,4 +1,4 @@
 
 export interface IFranvarohanteringState{
-    showCreate: boolean;
+    show: boolean;
 }
